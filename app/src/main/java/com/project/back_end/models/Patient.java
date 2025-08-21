@@ -1,4 +1,14 @@
 package com.project.back_end.models;
+import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
 
 @Entity
 public class Patient {

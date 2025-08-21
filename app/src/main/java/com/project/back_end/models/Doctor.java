@@ -1,6 +1,18 @@
 package com.project.back_end.models;
+import jakarta.persistence.Entity;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.constraints.NotNull;
 
-import java.lang.annotation.Inherited;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
 
 @Entity
 public class Doctor {
@@ -136,8 +148,8 @@ public class Doctor {
         return availableTimes;
     }
 
-    public void setAvailableTimes(List<String> availabeTimes) {
-        this.availableTimes = savailableTimes;
+    public void setAvailableTimes(List<String> availableTimes) {
+        this.availableTimes = availableTimes;
     }
 }
 

@@ -1,4 +1,14 @@
 package com.project.back_end.models;
+import jakarta.validation.constraints.NotNull;
+
+import java.time.Instant;
+import java.util.List;
+
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import jakarta.validation.constraints.Size;
+import org.springframework.data.mongodb.core.mapping.Field;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Document(collection = "prescriptions")
 public class Prescription {
@@ -166,7 +176,7 @@ public void setPatientName(String patientName){
     this.patientName = patientName;
 }
 
-public Logn getAppointmentId(){
+public Long getAppointmentId(){
     return appointmentId;
 }
 
@@ -186,7 +196,7 @@ public String getDosage(){
     return dosage;
 }
 
-public void setDosage(){
+public void setDosage(String dosage){
     this.dosage = dosage;
 }
 
@@ -194,7 +204,7 @@ public String getDoctorNotes(){
     return doctorNotes;
 }
 
-public void setDoctorNotes(){
+public void setDoctorNotes(String doctorNotes){
     this.doctorNotes = doctorNotes;
 }
 }

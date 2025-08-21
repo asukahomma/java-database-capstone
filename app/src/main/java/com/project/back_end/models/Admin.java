@@ -1,6 +1,11 @@
 package com.project.back_end.models;
-
-import java.lang.annotation.Inherited;
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Id;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
 
 @Entity
 public class Admin {
