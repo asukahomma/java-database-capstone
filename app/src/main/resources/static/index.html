@@ -1,4 +1,43 @@
 <!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Select Role</title>
+        <link rel="icon" type="image/png" th:href="@{../assets/images/logo/logo.png}" />
+        <link rel="stylesheet" href="../assets/css/index.css">
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <script src="../js/util.js" defer></script>
+        <script src="../js/render.js" defer></script>
+        <script src="../js/components/header.js" defer></script>
+        <script src="../js/components/footer.js" defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="wrapper">
+                <div id="header"></div>
+                <main class="main-content">
+                    <h2>Select Your Role</h2>
+                    <div id="roleButtons">
+                        <button id="btnAdmin" type="button" onclick="selectRole('Admin')">Admin</button>
+                        <button id="btnDoctor" type="button" onclick="selectRole('Doctor')">Doctor</button>
+                        <button id="btnPatient" type="button" onclick="selectRole('Patient')">Patient</button>
+                    </div>
+                </main>
+                <div id="footer"></div>
+            </div>
+        </div>
+        <div id="modal" class="modal hidden">
+            <div class="modal-content">
+              <button class="close-btn" onclick="closeModal()">×</button>
+              <div id="modal-body"></div>
+            </div>
+        </div>
+        <script type="module" src="../js/services/index.js" defer></script>
+    </body>
+
+</html>
 <!-- 
 
 Step-by-Step Explanation of `index.html`.

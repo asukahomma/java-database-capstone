@@ -1,7 +1,77 @@
 /* this is the style sheet file for index.htlm  */
 
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* full screen height */
+}
+
+h2 {
+  font-size: 48px;
+  margin-bottom: 50px;
+  color: #003e3e; /* dark teal */
+  font-weight: bold;
+  font-family: 'Alegreya', 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* vertical centering */
+  align-items: center;      /* horizontal centering */
+  text-align: center;
+
+  background-image: url('../assets/images/background.jpg'); /* adjust path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* stay still during scroll */
+}
+
+button {
+  background-color: #015c5d; /* teal green */
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  width: 200px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #A62B1F; /* bold red */
+}
+
+.dashboard-btn {
+  background-color: #015c5d; /* same base green */
+}
+
+.dashboard-btn:hover {
+  background-color: #003e3e; /* deep teal */
+}
+
+
 /* 
 **Global Reset (`*`)**
+
 
 * Remove all default margin and padding.
 * Use `border-box` for sizing to include padding and border in element size.

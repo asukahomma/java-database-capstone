@@ -1,5 +1,61 @@
 <!-- adminDashboard.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="icon" type="image/png" th:href="@{../assets/images/logo/logo.png}" />
+        <title>Admin Dashboard</title>
+        <link rel="stylesheet" href="../assets/css/index.css">
+        <link rel="stylesheet" href="../assets/css/style.css">
+        <script src="../js/util.js" defer></script>
+        <script src="../js/render.js" defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="wrapper">
+                <div id="header"></div>
+                <main class="main-content">
+                    <input type="text" id="searchBar" placeholder="search by doctor name" />
+                    <div class="filters">
+                        <label for="timeFilter" class="visually-hidden">Filter by time</label>
+                        <select id="timeFilter" name="timeFilter" aria-label="Filter by time">
+                          <option value="">All Times</option>
+                          <option value="AM">AM</option>
+                          <option value="PM">PM</option>
+                        </select>
+                        <label for="specialtyFilter" class="visually-hidden">Filter by specialty</label>
+                        <select id="specialtyFilter" name="specialtyFilter" aria-label="Filter by specialty">
+                            <option value="">All Specialties</option>
+                            <option value="Cardiologist">Cardiologist</option>
+                            <option value="Dentist">Dentist</option>
+                            <option value="Dermatologist">Dermatologist</option>
+                            <option value="Pediatrician">Pediatrician</option>
+                            <option value="Orthopedic">Orthopedic</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                    <div id="content"></div>
+                </main>
+                <div id="footer"></div>
+            </div>
+        </div>
+        <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+            <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+              <button id="closeModal" class="modal-close" type="button" aria-label="Close">&times;</button>
+              <div id="modal-body" class="modal-body">
+                <h3 id="modalTitle" class="visually-hidden">Dialog</h3>
+                <!-- Dynamic modal content will be injected here -->
+              </div>
+            </div>
+        </div>
+        <script type="module" src="../js/services/adminDashboard.js" defer></script>
+        <script type="module" src="../js/components/doctorCard.js" defer></script>
 
+
+    </body>
+
+
+</html>
 <!-- 
 Step-by-Step Explanation of `adminDashboard.html`
 This file creates the Admin Dashboard interface for managing doctor-related data 

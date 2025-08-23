@@ -1,3 +1,114 @@
+/* ==============================
+   doctorDashboard.css
+   Styles for doctorDashboard.html
+============================== */
+
+/* ---- Table Header ---- */
+.table-header {
+  font-size: 24px;
+  color: #015c5d; /* dark teal */
+  margin-bottom: 30px;
+  margin-right: 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ---- Table Styling ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: sans-serif;
+  margin-top: 20px;
+}
+
+/* ---- Table Head ---- */
+thead {
+  background-color: #33333310; /* very light dark */
+  color: #fff;
+}
+
+/* ---- Table Cells ---- */
+td,
+th {
+  padding: 12px 16px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/* ---- Table Row Styling ---- */
+tbody tr:nth-child(even) {
+  background-color: #f9f9f959; /* light grey */
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ffffffc0; /* soft white */
+}
+
+tbody tr:hover {
+  background-color: #015c5d39; /* light teal highlight */
+}
+
+/* ---- Prescription Button ---- */
+.prescription-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background-color: #015c5d;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.2s ease;
+}
+
+.prescription-btn:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+.prescription-btn:active {
+  transform: scale(0.95);
+}
+
+/* ---- No Record Message ---- */
+.noPatientRecord {
+  font-size: 16px;
+  font-style: italic;
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* ---- Today Button ---- */
+.today-btn {
+  margin-right: 10px;
+  padding: 10px;
+  background-color: #015c5d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.today-btn:hover {
+  background-color: #003e3e; /* darker teal */
+}
+
+/* ---- Date Picker ---- */
+.date-picker {
+  margin-left: 10px;
+  margin-top: 13px;
+  border-radius: 8px;
+  padding: 10px;
+  height: 30px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+
 /* This is the style sheet for the doctorDashboard.html */
 /* 
 **Table Header (`.table-header`)**
