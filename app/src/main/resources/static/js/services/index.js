@@ -1,3 +1,87 @@
+import {openModal} from '../components/modals.js';
+import {API_BASE_URL} from '../config/config.js';
+
+const ADMIN_API = API_BASE_URL + '/admin';
+const DOCTOR_API = API_BASE_URL + '/doctor/login';
+
+window.onload = function()
+{
+    const adminBtn = document.getElementById('adminLogin');
+    const doctoBtn = document.getElementById('docotorLogin');
+
+    if(adminBtn)
+    {
+        adminBtn.addEventListener('click', () =>
+        {
+            openModal('adminLogin');
+        });
+    }
+    
+    if(doctoBtn)
+    {
+        doctoBtn.addEventListener('click', () =>
+    {
+        openModal('docotrLogin');
+    });
+    }
+}
+
+window.adminLoginHandler = async function()
+{
+    const username = document.getElementById('username');
+    const password = document.getElementById('password');
+    const admin = {username, password};
+    try{
+        const response = fetch(ADMIN_API,{
+            method: 'POST',
+            headers: 'Content-Type: application/json',
+            body: JSON.stringify(admin)
+        });
+
+        if(response.ok){
+            const data = (await response).json();
+            let token = data.token;
+
+            if(!token){
+                alert('Invalid credentials!');
+            }else {
+                localStorage.setItem('authToken', token);
+                selectRole('admin');
+            }
+        }
+    }catch(err){
+        alert('Something went wrong. Please try again later.');
+    }   
+}
+window.doctorLoginHandler = async function(){
+    const email = document.getElementById('email').value;
+    const password = docunent.getElementById('password').value;
+    const doctor = {email, password};
+
+    try{
+        const response = fetch(DOCTOR_API,{
+            method: 'POST',
+            header: 'Content-Type: application/json',
+            body: JSON.stringify(doctor);
+        });
+
+        if(response.ok){
+            const data = (await response).json();
+            let token = data.token;
+
+            if(!token){
+                alert('Invalid credentials!');
+            }else {
+                localStorage.setItem('authToken', token);
+                selectRole('docotr');
+            }
+        }
+    }catch(err){
+        alert('Something went wrong. Please try again later.');
+    }
+
+}
+
 /*
   Import the openModal function to handle showing login popups/modals
   Import the base API URL from the config file
