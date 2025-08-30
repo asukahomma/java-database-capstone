@@ -32,14 +32,14 @@ window.adminLoginHandler = async function()
     const password = document.getElementById('password');
     const admin = {username, password};
     try{
-        const response = fetch(ADMIN_API,{
+        const response = await fetch(ADMIN_API,{
             method: 'POST',
-            headers: 'Content-Type: application/json',
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(admin)
         });
 
         if(response.ok){
-            const data = (await response).json();
+            const data = await response.json();
             let token = data.token;
 
             if(!token){
@@ -49,7 +49,7 @@ window.adminLoginHandler = async function()
                 selectRole('admin');
             }
         }
-    }catch(err){
+    }catch(error){
         alert('Something went wrong. Please try again later.');
     }   
 }
@@ -59,14 +59,14 @@ window.doctorLoginHandler = async function(){
     const doctor = {email, password};
 
     try{
-        const response = fetch(DOCTOR_API,{
+        const response = await fetch(DOCTOR_API,{
             method: 'POST',
-            header: 'Content-Type: application/json',
-            body: JSON.stringify(doctor);
+            header: {'Content-Type': 'application/json'},
+            body: JSON.stringify(doctor)
         });
 
         if(response.ok){
-            const data = (await response).json();
+            const data = await response.json();
             let token = data.token;
 
             if(!token){
@@ -76,7 +76,7 @@ window.doctorLoginHandler = async function(){
                 selectRole('docotr');
             }
         }
-    }catch(err){
+    }catch(error){
         alert('Something went wrong. Please try again later.');
     }
 

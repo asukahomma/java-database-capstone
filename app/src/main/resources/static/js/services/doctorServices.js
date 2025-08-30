@@ -1,3 +1,112 @@
+import { API_BASE_URL } from "../config/config";
+
+const DOCTOR_API = API_BASE_URL + '/doctor';
+
+
+export async function getDoctors(){
+    try{
+        const response = fetch(DOCTOR_API, {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json'}
+        });
+
+        if(!response.ok()){
+            console.error('Failed to fetch doctors:', response.statusText);
+            return [];
+        }
+
+        const data = await response.json();
+        return data.doctors || [];
+    }catch(error){
+        console.error('Failed to fetch doctors:', error);
+        return [];
+    }
+}
+
+export async function deleteDoctor(id, token){
+    try{
+        const response = fetch(`${DOCTOR_API}/${id}/${token}`, {
+            method: 'DELETE',
+            headers: {'Content-Type':'application/json'}
+        });
+
+        if(!response.ok()){
+            return {
+                'success': false,
+                'message': 'Faoled to delete doctor'
+            }
+        }
+
+        const data = await response.json();
+        return {
+            'success': true,
+            'message': data.message 
+        }
+
+    }catch(error){
+        console.error('Failed to delete doctor', error);
+        return {
+            'success': false
+            'message': 'Faoled to delete doctor'
+        }
+    }
+}
+
+export function saveDoctor(doctor , token){
+    try{
+        const response = await fetch(`${DOCTOR_API}/${token}`,{
+            method: 'POST',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(doctor)
+        });
+
+        if(!response.ok()){
+            return {
+                'success': false,
+                'message': 'Failed to save a new doctor.'
+            }
+        }
+
+        const data = await response.json();
+        return {
+            'success': true,
+            'message':data.message
+        }
+
+    }catch(error){
+        console.error('Failed to save a new  doctor', error);
+        return {
+            'success': false,
+            'message': 'Failed to save a new doctor.'
+        }
+    }
+}
+
+export function filterDoctors(name, time, specialty){
+    try {
+        const safeName = name && name.trim() !== "" ? encodeURIComponent(name) : "all";
+        const safeTime = time && time.trim() !== "" ? encodeURIComponent(time) : "all";
+        const safeSpecialty = specialty && specialty.trim() !== "" ? encodeURIComponent(specialty) : "all";
+
+        const response = await fetch(`${DOCTOR_API}/${safeName}/${safeTime}/${safeSpecialty}`,{
+            method: 'GET',
+            headers: {'Content-Type':'application/json'}
+        });
+
+        if(!response.ok()){
+            alert('Something went wrong. Please try again later.');
+        }
+
+        const data = await response.json();
+        return data.doctors || [];
+
+    }catch(error){
+        alert('Something went wrong. Please try again later.');
+    }
+}
+
+
+
 /*
   Import the base API URL from the config file
   Define a constant DOCTOR_API to hold the full endpoint for doctor-related actions
