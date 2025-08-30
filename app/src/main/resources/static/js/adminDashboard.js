@@ -1,3 +1,64 @@
+import {openModal} from '../components/modals.js';
+import {getDoctors, filterDoctors, saveDoctor} './services/doctorServices.js';
+import {createDoctorCard} from './components/doctorCard.js';
+
+document.getElementById('addDocBtn').addEventListener('click', () => {
+    openModal('addDoctor');
+});
+
+document.getElementById('saveDoctorBtn').addEventListener('click', () =>{
+    adminAddDoctor();
+})
+
+document.getElementById("searchBar").addEventListener("input", filterDoctorsOnChange);
+document.getElementById("filterTime").addEventListener("change", filterDoctorsOnChange);
+document.getElementById("filterSpecialty").addEventListener("change", filterDoctorsOnChange);
+
+window.onload = function (){
+    loadDoctorCards();
+    
+}
+
+function loadDoctorCards(){
+    try {
+        const doctors = await getDoctors();
+        renderDoctorCards(doctors);
+    }catch(error){
+        console.error('Failed to loadDoctorCards', error);
+    }
+}
+
+function filterDoctorsOnChange(){
+    try {
+        const name = document.getElementById("searchBar").value ; 
+        const time = document.getElementById("filterTime").value;
+        const specialty = document.getElementById("filterSpecialty").value;
+
+        const safeName = name && name.trim() !== "" ? name : null;
+        const safeTime = time && time.trim() !== "" ? time : null;
+        const safeSpecialty = specialty && specialty.trim() !== "" ? specialty : null;
+
+        doctors = await filterDoctors(safeName, safeTime, safeSpecialty);
+        if(doctors == []){
+            content.innerHTML = "<p> No doctors found with the given filters.</p>";
+            return;
+        }
+        renderDoctorCards(doctors);
+
+    }catch(error){
+        alert("Failed to filter doctors");
+    }
+}
+
+function renderDoctorCards(doctors){
+    const contentDiv = document.getElementById("content");
+    contentDiv.innerHTML = "";
+    
+    docotrs.forEach((doctor) => 
+        const doctorCard = createDoctorCard(doctor);
+        contentDiv.appendChild(doctorCard);
+    }
+}
 /*
   This script handles the admin dashboard functionality for managing doctors:
   - Loads all doctor cards
@@ -70,3 +131,55 @@
 
     If saving fails, show an error message
 */
+
+function adminAddDoctor(){
+    const nameEl = document.getElementById('doctorName');
+    const specialtyEl = document.getElementById('specialization');
+    const emailEl = document.getElementById('doctorEmail');
+    const passwordEl = document.getElementById('doctorPassword');
+    const phoneEl = document.getElementById('doctorPhone');
+    const availabilityEl= document.querySelectorAll('input[name="availability"]:checked');
+
+    const name = nameEl?.value?.trim() || '';
+    const email = emailEl?.value?.trim() || '';
+    const phone = phoneEl?.value?.trim() || '';
+    const password = passwordEl?.value || '';
+    const specialty = specialtyEl?.value?.trim() || '';
+    const availability = Array.from(availabilityEl).map(box => box.value) || [];
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('You are not authenticated. Please log in as admin first.');
+        return; // stop execution
+    }
+
+    const doctor = {
+        'name': name,
+        'email': email,
+        'phone': phone,
+        'password': password,
+        'specialty': specialty,
+        'availability': availability
+    }
+
+    try{
+        const result = await saveDoctor(doctor);
+
+        if(result.success){
+            alert(result.message);
+            const modal = document.getElementById('addDoctorModal');
+            if (modal) modal.style.display = 'none';
+            location.reload();
+        }else {
+            alert(result.message);
+        }
+
+    }catch(error){
+        console.error('Error saving doctor:', err);
+        alert('An error occurred while saving the doctor. Please try again.');
+    }
+
+
+
+
+}

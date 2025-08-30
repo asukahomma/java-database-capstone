@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../config/config";
+import { API_BASE_URL } from './config/config';
 
 const DOCTOR_API = API_BASE_URL + '/doctor';
 
