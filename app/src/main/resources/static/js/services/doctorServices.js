@@ -52,7 +52,7 @@ export async function deleteDoctor(id, token){
     }
 }
 
-export function saveDoctor(doctor , token){
+export async function saveDoctor(doctor , token){
     try{
         const response = await fetch(`${DOCTOR_API}/${token}`,{
             method: 'POST',
@@ -82,7 +82,7 @@ export function saveDoctor(doctor , token){
     }
 }
 
-export function filterDoctors(name, time, specialty){
+export async function filterDoctors(name, time, specialty){
     try {
         const safeName = name && name.trim() !== "" ? encodeURIComponent(name) : "all";
         const safeTime = time && time.trim() !== "" ? encodeURIComponent(time) : "all";
@@ -102,6 +102,7 @@ export function filterDoctors(name, time, specialty){
 
     }catch(error){
         alert('Something went wrong. Please try again later.');
+        return [];
     }
 }
 
