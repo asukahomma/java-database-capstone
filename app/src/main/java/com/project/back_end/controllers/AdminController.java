@@ -23,9 +23,12 @@ public class AdminController {
 //    - Annotate the class with `@RestController` to indicate that it's a REST controller, used to handle web requests and return JSON responses.
 //    - Use `@RequestMapping("${api.path}admin")` to define a base path for all endpoints in this controller.
 //    - This allows the use of an external property (`api.path`) for flexible configuration of endpoint paths.
+    private final Service service;
     
     @Autowired
-    private final Service service;
+    public AdminController(Service service) {
+        this.service = service;
+    }
 // 2. Autowire Service Dependency:
 //    - Use constructor injection to autowire the `Service` class.
 //    - The service handles core logic related to admin validation and token checking.

@@ -26,12 +26,12 @@ import jakarta.transaction.Transactional;
 @Service
 public class DoctorService {
 
-    private final DoctorRepository doctorRespRepository;
+    private final DoctorRepository doctorRepository;
     private final AppointmentRepository appointmentRepository;
     private final TokenService tokenService;
 
     public DoctorService(DoctorRepository doctorRepository, AppointmentRepository appointmentRepository, TokenService tokenService){
-        this.doctorRespRepository = doctorRepository;
+        this.doctorRepository = doctorRepository;
         this.appointmentRepository = appointmentRepository;
         this.tokenService = tokenService;
     }
@@ -51,7 +51,7 @@ public class DoctorService {
 //    - The `@Transactional` annotation ensures that database operations are consistent and wrapped in a single transaction.
 //    - Instruction: Add the `@Transactional` annotation above the methods that perform database operations or queries.
     @Transactional
-    public List<String> getDocotorAvailability(Long doctorId, LocalDate date){
+    public List<String> getDoctorAvailability(Long doctorId, LocalDate date){
         Optional<Doctor> doctor = doctorRepository.findById(doctorId);
 
         if (doctor.isEmpty()) {

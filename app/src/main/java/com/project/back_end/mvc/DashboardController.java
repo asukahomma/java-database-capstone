@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class DashboardController {
 
     @Autowired 
-    private final Service service;
+    Service service;
 
     @GetMapping("/adminDashboard/{token}")
     public String adminDashboard(@PathVariable String token){
-        Map<String,String> result = service.validateToken(token, "admin");
+        Map<String,String> result = service.validateToken(token, "admin").getBody();
         if(result == null || result.isEmpty()){
             return "admin/adminDashboard";
         }else {
@@ -28,7 +28,7 @@ public class DashboardController {
 
     @GetMapping("/doctorDashboard/{token}")
     public String doctorDashboard(@PathVariable String token){
-        Map<String,String> result = service.validateToken(token, "doctor");
+        Map<String,String> result = service.validateToken(token, "doctor").getBody();
         if(result == null || result.isEmpty()){
             return "doctor/doctorDashboard";
         }else {
