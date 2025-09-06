@@ -82,29 +82,30 @@ export async function saveDoctor(doctor , token){
     }
 }
 
-export async function filterDoctors(name, time, specialty){
+export async function filterDoctors(name ,time ,specialty) {
     try {
-        const safeName = name && name.trim() !== "" ? encodeURIComponent(name) : "all";
-        const safeTime = time && time.trim() !== "" ? encodeURIComponent(time) : "all";
-        const safeSpecialty = specialty && specialty.trim() !== "" ? encodeURIComponent(specialty) : "all";
-
-        const response = await fetch(`${DOCTOR_API}/${safeName}/${safeTime}/${safeSpecialty}`,{
-            method: 'GET',
-            headers: {'Content-Type':'application/json'}
-        });
-
-        if(!response.ok){
-            alert('Something went wrong. Please try again later.');
-        }
-
+      const response = await fetch(`${DOCTOR_API}/filter/${name}/${time}/${specialty}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (response.ok) {
         const data = await response.json();
-        return data.doctors || [];
-
-    }catch(error){
-        alert('Something went wrong. Please try again later.');
-        return [];
+        return data; 
+        
+      } else {
+        console.error("Failed to fetch doctors:", response.statusText);
+        return { doctors: [] };
+        
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Something went wrong!");
+      return { doctors: [] }; 
     }
-}
+  }
 
 
 

@@ -45,7 +45,7 @@ window.adminLoginHandler = async function()
             if(!token){
                 alert('Invalid credentials!');
             }else {
-                localStorage.setItem('authToken', token);
+                localStorage.setItem('token', token);
                 selectRole('admin');
             }
         }
@@ -72,7 +72,7 @@ window.doctorLoginHandler = async function(){
             if(!token){
                 alert('Invalid credentials!');
             }else {
-                localStorage.setItem('authToken', token);
+                localStorage.setItem('token', token);
                 selectRole('docotr');
             }
         }

@@ -1,4 +1,3 @@
-// loggedPatient.js 
 import { getDoctors } from './services/doctorServices.js';
 import { createDoctorCard } from './components/doctorCard.js';
 import { filterDoctors } from './services/doctorServices.js';
@@ -13,7 +12,7 @@ function loadDoctorCards() {
   getDoctors()
     .then(doctors => {
       const contentDiv = document.getElementById("content");
-      contentDiv.innerHTML = "";
+      contentDiv.innerHTML = ""; 
 
       doctors.forEach(doctor => {
         const card = createDoctorCard(doctor);
@@ -70,7 +69,7 @@ export function showBookingOverlay(e, doctor, patient) {
       appointmentTime: `${date}T${startTime}:00`,
       status: 0
     };
-
+  
 
     const { success, message } = await bookAppointment(appointment, token);
 
@@ -84,30 +83,30 @@ export function showBookingOverlay(e, doctor, patient) {
   });
 }
 
-
+  
 
 // Filter Input
 document.getElementById("searchBar").addEventListener("input", filterDoctorsOnChange);
-document.getElementById("timeFilter").addEventListener("change", filterDoctorsOnChange);
-document.getElementById("specialtyFilter").addEventListener("change", filterDoctorsOnChange);
+document.getElementById("filterTime").addEventListener("change", filterDoctorsOnChange);
+document.getElementById("filterSpecialty").addEventListener("change", filterDoctorsOnChange);
 
 
 
 function filterDoctorsOnChange() {
-  const searchBar = document.getElementById("searchBar").value.trim();
-  const filterTime = document.getElementById("timeFilter").value;
-  const filterSpecialty = document.getElementById("specialtyFilter").value;
+  const searchBar = document.getElementById("searchBar").value.trim(); 
+  const filterTime = document.getElementById("filterTime").value;  
+  const filterSpecialty = document.getElementById("filterSpecialty").value;  
 
-
-  const name = searchBar.length > 0 ? searchBar : null;
+  
+  const name = searchBar.length > 0 ? searchBar : null;  
   const time = filterTime.length > 0 ? filterTime : null;
   const specialty = filterSpecialty.length > 0 ? filterSpecialty : null;
 
-  filterDoctors(name, time, specialty)
+  filterDoctors(name , time ,specialty)
     .then(response => {
       const doctors = response.doctors;
       const contentDiv = document.getElementById("content");
-      contentDiv.innerHTML = "";
+      contentDiv.innerHTML = ""; 
 
       if (doctors.length > 0) {
         console.log(doctors);
@@ -128,11 +127,11 @@ function filterDoctorsOnChange() {
 
 export function renderDoctorCards(doctors) {
   const contentDiv = document.getElementById("content");
-  contentDiv.innerHTML = "";
+      contentDiv.innerHTML = ""; 
 
-  doctors.forEach(doctor => {
-    const card = createDoctorCard(doctor);
-    contentDiv.appendChild(card);
-  });
-
+      doctors.forEach(doctor => {
+        const card = createDoctorCard(doctor);
+        contentDiv.appendChild(card);
+      });
+   
 }
