@@ -7,7 +7,7 @@ const DOCTOR_API = API_BASE_URL + '/doctor/login';
 window.onload = function()
 {
     const adminBtn = document.getElementById('adminLogin');
-    const doctoBtn = document.getElementById('docotorLogin');
+    const doctorBtn = document.getElementById('docotorLogin');
 
     if(adminBtn)
     {
@@ -17,19 +17,19 @@ window.onload = function()
         });
     }
     
-    if(doctoBtn)
+    if(doctorBtn)
     {
-        doctoBtn.addEventListener('click', () =>
+        doctorBtn.addEventListener('click', () =>
     {
-        openModal('docotrLogin');
+        openModal('doctorLogin');
     });
     }
 }
 
 window.adminLoginHandler = async function()
 {
-    const username = document.getElementById('username');
-    const password = document.getElementById('password');
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
     const admin = {username, password};
     try{
         const response = await fetch(ADMIN_API,{

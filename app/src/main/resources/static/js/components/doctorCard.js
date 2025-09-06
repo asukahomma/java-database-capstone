@@ -7,9 +7,9 @@
   - deleteDoctor API (admin)
   - fetchPatientDetails API (patient info before booking)
 */
-import { showBookingOverlay } from "./loggedPatient.js";          // overlay function for booking appointments
-import { deleteDoctor } from "./doctorServices.js";               // admin: remove doctor
-import { fetchPatientDetails } from "./patientServices.js";       // patient data for booking
+import { showBookingOverlay } from "../loggedPatient.js";
+import { deleteDoctor } from "../services/doctorServices.js"
+import { getPatientData } from "../services/patientServices.js";
 
 /**
  * Create a DOM element for a single doctor card.
@@ -148,7 +148,7 @@ export function createDoctorCard(doctor) {
 
       try {
         // Fetch patient data
-        const patient = await fetchPatientDetails(patientToken);
+        const patient = await getPatientData(patientToken);
         if (!patient) throw new Error("Unable to fetch patient data.");
 
         // Show booking overlay with doctor & patient

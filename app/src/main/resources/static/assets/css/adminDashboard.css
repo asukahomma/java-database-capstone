@@ -47,7 +47,7 @@ h2 {
   flex-direction: column;
   text-align: center;
 
-  background-image: url("index.png"); /* adjust path if needed */
+  background-image: url("../images/defineRole/index.png"); /* adjust path if needed */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

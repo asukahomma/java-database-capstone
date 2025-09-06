@@ -1,16 +1,16 @@
-import { API_BASE_URL } from './config/config';
+import { API_BASE_URL } from '../config/config.js';
 
 const DOCTOR_API = API_BASE_URL + '/doctor';
 
 
 export async function getDoctors(){
     try{
-        const response = fetch(DOCTOR_API, {
+        const response = await fetch(DOCTOR_API, {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
         });
 
-        if(!response.ok()){
+        if(!response.ok){
             console.error('Failed to fetch doctors:', response.statusText);
             return [];
         }
@@ -30,7 +30,7 @@ export async function deleteDoctor(id, token){
             headers: {'Content-Type':'application/json'}
         });
 
-        if(!response.ok()){
+        if(!response.ok){
             return {
                 'success': false,
                 'message': 'Faoled to delete doctor'
@@ -46,7 +46,7 @@ export async function deleteDoctor(id, token){
     }catch(error){
         console.error('Failed to delete doctor', error);
         return {
-            'success': false
+            'success': false,
             'message': 'Faoled to delete doctor'
         }
     }
@@ -60,7 +60,7 @@ export async function saveDoctor(doctor , token){
             body: JSON.stringify(doctor)
         });
 
-        if(!response.ok()){
+        if(!response.ok){
             return {
                 'success': false,
                 'message': 'Failed to save a new doctor.'
@@ -93,7 +93,7 @@ export async function filterDoctors(name, time, specialty){
             headers: {'Content-Type':'application/json'}
         });
 
-        if(!response.ok()){
+        if(!response.ok){
             alert('Something went wrong. Please try again later.');
         }
 

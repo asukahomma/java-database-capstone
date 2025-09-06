@@ -1,6 +1,6 @@
-import {openModal} from '../components/modals.js';
-import {getDoctors, filterDoctors, saveDoctor} './services/doctorServices.js';
-import {createDoctorCard} from './components/doctorCard.js';
+import { openModal } from './components/modals.js';
+import { getDoctors  , filterDoctors , saveDoctor } from './services/doctorServices.js';
+import { createDoctorCard } from './components/doctorCard.js';
 
 document.getElementById('addDocBtn').addEventListener('click', () => {
     openModal('addDoctor');
@@ -19,7 +19,7 @@ window.onload = function (){
     
 }
 
-function loadDoctorCards(){
+async function loadDoctorCards(){
     try {
         const doctors = await getDoctors();
         renderDoctorCards(doctors);
@@ -28,7 +28,7 @@ function loadDoctorCards(){
     }
 }
 
-function filterDoctorsOnChange(){
+async function filterDoctorsOnChange(){
     try {
         const name = document.getElementById("searchBar").value ; 
         const time = document.getElementById("filterTime").value;
@@ -54,10 +54,10 @@ function renderDoctorCards(doctors){
     const contentDiv = document.getElementById("content");
     contentDiv.innerHTML = "";
     
-    docotrs.forEach((doctor) => 
+    docotrs.forEach((doctor) => {
         const doctorCard = createDoctorCard(doctor);
         contentDiv.appendChild(doctorCard);
-    }
+    });
 }
 /*
   This script handles the admin dashboard functionality for managing doctors:
@@ -132,7 +132,7 @@ function renderDoctorCards(doctors){
     If saving fails, show an error message
 */
 
-function adminAddDoctor(){
+async function adminAddDoctor(){
     const nameEl = document.getElementById('doctorName');
     const specialtyEl = document.getElementById('specialization');
     const emailEl = document.getElementById('doctorEmail');

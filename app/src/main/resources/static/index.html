@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <title>Select Role</title>
-        <link rel="icon" type="image/png" th:href="@{../assets/images/logo/logo.png}" />
+        <link rel="icon" type="image/svg+xml" href="../assets/images/logo/logo.png" />
         <link rel="stylesheet" href="../assets/css/index.css">
         <link rel="stylesheet" href="../assets/css/style.css">
         <script src="../js/util.js" defer></script>
@@ -20,9 +20,9 @@
                 <main class="main-content">
                     <h2>Select Your Role</h2>
                     <div id="roleButtons">
-                        <button id="btnAdmin" type="button" onclick="selectRole('Admin')">Admin</button>
-                        <button id="btnDoctor" type="button" onclick="selectRole('Doctor')">Doctor</button>
-                        <button id="btnPatient" type="button" onclick="selectRole('Patient')">Patient</button>
+                        <button id="adminLogin" type="button" >Admin</button>
+                        <button type="button" onclick="selectRole('patient')">Patient</button>
+                        <button id="docotorLogin" type="button" >Doctor</button>
                     </div>
                 </main>
                 <div id="footer"></div>
@@ -30,7 +30,7 @@
         </div>
         <div id="modal" class="modal hidden">
             <div class="modal-content">
-              <button class="close-btn" onclick="closeModal()">×</button>
+              <button id="closeModal" class="close-btn" onclick="closeModal()">×</button>
               <div id="modal-body"></div>
             </div>
         </div>
