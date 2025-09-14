@@ -55,13 +55,13 @@ window.adminLoginHandler = async function()
 }
 window.doctorLoginHandler = async function(){
     const email = document.getElementById('email').value;
-    const password = docunent.getElementById('password').value;
+    const password = document.getElementById('password').value;
     const doctor = {email, password};
 
     try{
         const response = await fetch(DOCTOR_API,{
             method: 'POST',
-            header: {'Content-Type': 'application/json'},
+            headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(doctor)
         });
 
@@ -73,7 +73,7 @@ window.doctorLoginHandler = async function(){
                 alert('Invalid credentials!');
             }else {
                 localStorage.setItem('token', token);
-                selectRole('docotr');
+                selectRole('doctor');
             }
         }
     }catch(error){

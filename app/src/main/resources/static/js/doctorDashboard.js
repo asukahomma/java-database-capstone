@@ -1,10 +1,10 @@
-import {getAllAppointments} from '/services/appointmentRecordService.js';
+import {getAllAppointments} from './services/appointmentRecordService.js';
 import {createPatientRow} from './components/patientRows.js';
 
-var patientTableBody = document.getElementById('patientTableBody');
-var selectedDate = todayYYYYMMDD();
-var token = localStorage.getItem('token');
-var patientName = null;
+const tableBody = document.getElementById("patientTableBody");
+let selectedDate = new Date().toISOString().split('T')[0];
+let token = localStorage.getItem("token");
+let patientName = null;
 
 document.getElementById('searchBar').addEventListener('input', (e) =>{
     const val = e.target.value?.trim() || '';
@@ -23,25 +23,57 @@ document.getElementById('datePicker').addEventListener('change', (e) =>{
     loadAppointments();
 });
 
-function loadAppointments(){
+// async function loadAppointments(){
+
+//     try {
+//         const appointments = await getAllAppointments(selectedDate, patientName, token);
+//         patientTableBody.innerHTML = '';
+
+//         if(!appointments || appointments == []){
+//             patientTableBody.appendChild(messageRow('No Appointments found for today.'));
+//             return;
+//         }else {
+//             appointments.forEach(appointment =>{
+//                 patientTableBody.appendChild(createPatientRow(appointment));
+//             });
+//         }
+//     }catch(error){
+//         patientTableBody.appendChild(messageRow('Error loading appointments. Try again later.'));
+//     }
+
+// }
+
+async function loadAppointments() {
 
     try {
-        const appointments = await getAllAppointments(selectedDate, patientName, token);
-        patientTableBody.innerHTML = '';
-
-        if(!appointments || appointments == []){
-            patientTableBody.appendChild(messageRow('No Appointments found for today.'));
-            return;
-        }else {
-            appointments.forEach(appointment =>{
-                patientTableBody.appendChild(createPatientRow(appointment));
-            });
-        }
-    }catch(error){
-        patientTableBody.appendChild(messageRow('Error loading appointments. Try again later.'));
+      const response = await getAllAppointments(selectedDate, patientName, token);
+      const appointments = response.appointments || [];
+      
+      tableBody.innerHTML = "";
+  
+      if (appointments.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5">No Appointments found for today.</td></tr>`;
+        return;
+      }
+      console.log(appointments)
+      appointments.forEach(appointment => {
+        const patient = {
+          id: appointment.patientId,
+          name: appointment.patientName,
+          phone: appointment.patientPhone,
+          email: appointment.patientEmail,
+        };
+        console.log(appointment.doctorId)
+        const row = createPatientRow(patient,appointment.id,appointment.doctorId);
+        tableBody.appendChild(row);
+      });
+    } catch (error) {
+      console.error("Error loading appointments:", error);
+      tableBody.innerHTML = `<tr><td colspan="5">Error loading appointments. Try again later.</td></tr>`;
     }
+  }
+  
 
-}
 
 
 // ---- Helpers ----
